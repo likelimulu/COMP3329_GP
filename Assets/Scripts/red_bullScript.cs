@@ -24,6 +24,8 @@ public class red_bullScript : MonoBehaviour
 
     public AudioClip myClip;
 
+    public GameObject redBottlePrefab;
+
     void Start()
     {
         directionTimer = changeDirectionInterval;
@@ -185,6 +187,13 @@ public class red_bullScript : MonoBehaviour
             // Check if monster is dead
             if (monsterHealth <= 0)
             {
+                float randomValue = Random.Range(0f, 1f);
+
+                if (randomValue <= 0.5f)
+                {
+                    GameObject redBottle = Instantiate(redBottlePrefab, transform.position, Quaternion.identity);
+                }
+
                 // Destroy the monster
                 Destroy(gameObject);
             }

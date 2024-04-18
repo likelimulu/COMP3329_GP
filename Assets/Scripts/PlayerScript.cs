@@ -25,7 +25,7 @@ public class PlayerScript : MonoBehaviour
     private int maxJumpCount = 2;
 
     private int defaultLayer;
-    private int enemyLayer;
+    private int hittedLayer;
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         defaultLayer = LayerMask.NameToLayer("Default");
-        enemyLayer = LayerMask.NameToLayer("Monster");
+        hittedLayer = LayerMask.NameToLayer("Hitted player");
     }
 
     // Update is called once per frame
@@ -137,7 +137,7 @@ public class PlayerScript : MonoBehaviour
             animator.SetBool("BeAttacked", true);
             life--;
 
-            gameObject.layer = enemyLayer;
+            gameObject.layer = hittedLayer;
 
             // 被攻击完成后重置状态为 false
             StartCoroutine(ResetBeAttackedState());
@@ -218,6 +218,22 @@ public class PlayerScript : MonoBehaviour
     public int getLife()
     {
         return life;
+    }
+
+    public void eatHPBottle()
+    {
+        int HP_up = 2;
+        if (life < maxLife)
+        {
+            if (maxLife - life < HP_up)
+            {
+                life = maxLife;
+            }
+            else
+            {
+                life += HP_up;
+            }
+        }
     }
 
 }

@@ -30,6 +30,7 @@ public class red_eagleScript : MonoBehaviour
     private float minY = -1f; // y 值的最小范围
     private float maxY = 1f; // y 值的最大范围
 
+    public GameObject redBottlePrefab;
 
     void Start()
     {
@@ -233,6 +234,13 @@ public class red_eagleScript : MonoBehaviour
             // Check if monster is dead
             if (monsterHealth <= 0)
             {
+                float randomValue = Random.Range(0f, 1f);
+
+                if (randomValue <= 0.5f)
+                {
+                    GameObject redBottle = Instantiate(redBottlePrefab, transform.position, Quaternion.identity);
+                }
+
                 // Destroy the monster
                 Destroy(gameObject);
             }

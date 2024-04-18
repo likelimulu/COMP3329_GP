@@ -48,7 +48,7 @@ public class SpawnScript : MonoBehaviour
         // If all enemies in the wave are spawned and all enemies are destroyed, start the next wave
         yield return new WaitUntil(() => spawnedEnemies == enemiesToSpawn && GameObject.FindGameObjectsWithTag("enemy").Length == 0);
 
-        if (waveNumber < 3)
+        if (waveNumber < 2)
         {
             waveNumber++;
             StartNextWave();

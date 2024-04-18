@@ -194,3 +194,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3406338119134124678}
+  redBottlePrefab: {fileID: 8127806733886225321, guid: e1c5228d70d58ef43abfcb7db397ff48, type: 3}
