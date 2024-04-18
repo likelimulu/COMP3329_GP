@@ -5,12 +5,12 @@ using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    public int life = 3;
+    private int life = 100;
     public AudioClip myClip;
-    private float delay = 1.5f; // 自身生命值<=0时等待销毁动画放完的时间
+    private float delay = 1.4f; // 自身生命值<=0时等待销毁动画放完的时间
 
     public GameObject shootPrefab;
-    private float shootRotationAngle = 270f;
+    private float shootRotationAngle = 0f;
     private float spawnOffset = 0.6f;
     private float shootSpeed = 1.0f;
 
@@ -23,6 +23,9 @@ public class PlayerScript : MonoBehaviour
     private int jumpCount = 0;
     private int maxJumpCount = 2;
 
+    private int defaultLayer;
+    private int enemyLayer;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,7 +34,8 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        defaultLayer = LayerMask.NameToLayer("Default");
+        enemyLayer = LayerMask.NameToLayer("Monster");
     }
 
     // Update is called once per frame
@@ -47,10 +51,10 @@ public class PlayerScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = 2;
+            scale.x = 3;
             transform.localScale = scale;
 
-            shootRotationAngle = 270f;
+            shootRotationAngle = 0f;
             spawnOffset = 0.5f;
             shootSpeed = 1.0f;
         }
@@ -58,10 +62,10 @@ public class PlayerScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = -2;
+            scale.x = -3;
             transform.localScale = scale;
 
-            shootRotationAngle = 90f;
+            shootRotationAngle = 180f;
             spawnOffset = -0.5f;
             shootSpeed = -1.0f;
         }
@@ -76,9 +80,13 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.K))
         {
-            if (jumpCount < maxJumpCount)
+            if (jumpCount == 0 && jumpCount < maxJumpCount)
             {
                 Jump();
+                jumpCount++;
+            } else if (jumpCount == 1 && jumpCount < maxJumpCount)
+            {
+                SecondJump();
                 jumpCount++;
             }
         }
@@ -123,12 +131,17 @@ public class PlayerScript : MonoBehaviour
 
     public void BeAttacked()
     {
-        // 设置攻击状态为 true
-        animator.SetBool("BeAttacked", true);
-        life--;
+        // 设置被攻击状态为 true
+        if (animator.GetBool("BeAttacked") == false) {
+            animator.SetBool("BeAttacked", true);
+            life--;
 
-        // 攻击完成后重置攻击状态为 false
-        StartCoroutine(ResetBeAttackedState());
+            gameObject.layer = enemyLayer;
+
+            // 被攻击完成后重置状态为 false
+            StartCoroutine(ResetBeAttackedState());
+            StartCoroutine(BlinkMonster());
+        }
     }
 
     IEnumerator ResetBeAttackedState()
@@ -138,6 +151,23 @@ public class PlayerScript : MonoBehaviour
 
         // 重置攻击状态为 false
         animator.SetBool("BeAttacked", false);
+
+        gameObject.layer = defaultLayer;
+    }
+
+    IEnumerator BlinkMonster()
+    {
+        // Get the original color of the monster
+        Color originalColor = GetComponent<SpriteRenderer>().color;
+
+        // Blink the monster for a few times
+        for (int i = 0; i < 3; i++)
+        {
+            GetComponent<SpriteRenderer>().color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            GetComponent<SpriteRenderer>().color = originalColor;
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 
     private void Jump()
@@ -149,6 +179,15 @@ public class PlayerScript : MonoBehaviour
         rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
         animator.SetBool("Jump", true);
     }
+    private void SecondJump()
+    {
+        // 在这里实现跳跃逻辑，例如给角色施加向上的力
+        v = rb.velocity;
+        v.y = 0f;
+        rb.velocity = v;
+        rb.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
+        animator.SetBool("SecondJump", true);
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -156,6 +195,7 @@ public class PlayerScript : MonoBehaviour
         {
             jumpCount = 0; // 角色着陆后重置跳跃次数
             animator.SetBool("Jump", false);
+            animator.SetBool("SecondJump", false);
         }
     }
     private IEnumerator DestroyAfterDelay()

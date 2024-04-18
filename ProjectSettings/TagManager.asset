@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - enemy
   layers:
   - Default
   - TransparentFX
@@ -12,7 +13,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Monster
   - 
   - 
   - 
@@ -39,12 +40,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: enermy generation layer
+    uniqueID: 3608527387
+    locked: 0
   - name: BG
     uniqueID: 2921400053
     locked: 1
   - name: spawn
     uniqueID: 394984915
     locked: 0
+  - name: splash layer
+    uniqueID: 2535973147
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: bullet layer
+    uniqueID: 2559714117
     locked: 0
