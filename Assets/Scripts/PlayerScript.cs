@@ -5,7 +5,8 @@ using System;
 
 public class PlayerScript : MonoBehaviour
 {
-    private int life = 100;
+    private int maxLife = 10;
+    private int life = 10;
     public AudioClip myClip;
     private float delay = 1.4f; // 自身生命值<=0时等待销毁动画放完的时间
 
@@ -18,7 +19,7 @@ public class PlayerScript : MonoBehaviour
     private Vector2 v;
 
     public Animator animator;
-    public float jumpForce = 50f;
+    private float jumpForce = 50f;
 
     private int jumpCount = 0;
     private int maxJumpCount = 2;
@@ -149,10 +150,13 @@ public class PlayerScript : MonoBehaviour
         // 假设攻击持续 1 秒钟
         yield return new WaitForSeconds(1f);
 
-        // 重置攻击状态为 false
-        animator.SetBool("BeAttacked", false);
+        if (life > 0)
+        {
+            // 重置攻击状态为 false
+            animator.SetBool("BeAttacked", false);
 
-        gameObject.layer = defaultLayer;
+            gameObject.layer = defaultLayer;
+        }
     }
 
     IEnumerator BlinkMonster()
@@ -205,6 +209,15 @@ public class PlayerScript : MonoBehaviour
 
         // 销毁当前对象
         Destroy(gameObject);
+    }
+
+    public int getMaxLife()
+    {
+        return maxLife;
+    }
+    public int getLife()
+    {
+        return life;
     }
 
 }
