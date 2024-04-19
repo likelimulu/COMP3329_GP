@@ -25,10 +25,13 @@ public class red_slimeScript : MonoBehaviour
     private bool isAttacking = false;
 
     public GameObject redBottlePrefab;
+
+    private float initialX;
     void Start()
     {
         directionTimer = changeDirectionInterval;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialX = transform.localScale.x;
     }
 
     void Update()
@@ -103,14 +106,14 @@ public class red_slimeScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = -3;
+            scale.x = -1 * initialX;
             transform.localScale = scale;
         }
         else if (attackDirection < 0)
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = 3;
+            scale.x = initialX;
             transform.localScale = scale;
         }
 

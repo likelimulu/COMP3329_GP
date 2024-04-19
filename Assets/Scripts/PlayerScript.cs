@@ -27,6 +27,8 @@ public class PlayerScript : MonoBehaviour
     private int defaultLayer;
     private int hittedLayer;
 
+    private float initialX;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -37,6 +39,7 @@ public class PlayerScript : MonoBehaviour
     {
         defaultLayer = LayerMask.NameToLayer("Default");
         hittedLayer = LayerMask.NameToLayer("Hitted player");
+        initialX = transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -52,7 +55,7 @@ public class PlayerScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = 3;
+            scale.x = initialX;
             transform.localScale = scale;
 
             shootRotationAngle = 0f;
@@ -63,7 +66,7 @@ public class PlayerScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = -3;
+            scale.x = -1 * initialX;
             transform.localScale = scale;
 
             shootRotationAngle = 180f;

@@ -26,10 +26,13 @@ public class red_bullScript : MonoBehaviour
 
     public GameObject redBottlePrefab;
 
+    private float initialX;
+
     void Start()
     {
         directionTimer = changeDirectionInterval;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        initialX = transform.localScale.x;
     }
 
 
@@ -95,14 +98,14 @@ public class red_bullScript : MonoBehaviour
                 {
                     Transform transform = GetComponent<Transform>();
                     Vector3 scale = transform.localScale;
-                    scale.x = -3;
+                    scale.x = -1 * initialX;
                     transform.localScale = scale;
                 }
                 else if (direction < 0)
                 {
                     Transform transform = GetComponent<Transform>();
                     Vector3 scale = transform.localScale;
-                    scale.x = 3;
+                    scale.x = initialX;
                     transform.localScale = scale;
                 }
                 
@@ -133,14 +136,14 @@ public class red_bullScript : MonoBehaviour
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = -3;
+            scale.x = -1 * initialX;
             transform.localScale = scale;
         }
         else if (attackDirection < 0)
         {
             Transform transform = GetComponent<Transform>();
             Vector3 scale = transform.localScale;
-            scale.x = 3;
+            scale.x = initialX;
             transform.localScale = scale;
         }
 
