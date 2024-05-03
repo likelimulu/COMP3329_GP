@@ -67,11 +67,11 @@ Copy it into your local project folder and start editing it with Unity.
 
 Poster of our project
 
-![Poster](https://upload.cc/i1/2024/05/03/KduPlk.png)
+![Poster](https://upload.cc/i1/2024/05/03/tum1DU.png)
 
 Demo video of our project
 
-[![Watch the video](https://upload.cc/i1/2024/05/03/Set6NI.png)](https://drive.google.com/file/d/1_R7O_JB5qOfVtHVBct_HNJgvn367s6L_/view?usp=sharing)
+[![Watch the video](https://drive.google.com/file/d/1zANYQdvd6FnMfxFfIAajpOziEJZOFdGS/view?usp=sharing)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
