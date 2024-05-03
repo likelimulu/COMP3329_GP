@@ -6,6 +6,7 @@
 - [x] Intense Boss Fight
 - [x] Music Volume Ajustment
 - [ ] Interactions With The Background
+- [ ] Skills system
 - [ ] Obstacles and Traps
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
