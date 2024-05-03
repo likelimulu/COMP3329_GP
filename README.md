@@ -71,7 +71,7 @@ Poster of our project
 
 Demo video of our project
 
-[![Watch the video](https://drive.google.com/file/d/1zANYQdvd6FnMfxFfIAajpOziEJZOFdGS/view?usp=sharing)
+[![Watch the video](https://drive.google.com/file/d/1zANYQdvd6FnMfxFfIAajpOziEJZOFdGS/view?usp=sharing)]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
